@@ -13,9 +13,11 @@ load_dotenv()
 # LOG_DIR = os.environ.get("LOG_DIR")
 MQTT_PORT = os.environ.get("MQTT_PORT")
 HOST = os.environ.get("HOST")
+DECONZ_API_PORT = os.environ.get("DECONZ_API_PORT")
+DECONZ_API_KEY = os.environ.get("DECONZ_API_KEY")
 MQTT_USER = os.environ.get("MQTT_USER")
 MQTT_PASSWORD = os.environ.get("MQTT_PASSWORD")
-BASE_DECONZ_API_URL = os.environ.get("BASE_DECONZ_API_URL")
+BASE_DECONZ_API_URL = f"http://{HOST}:{DECONZ_API_PORT}/api/{DECONZ_API_KEY}/"
 TOPIC = "sensors/magnet"
 
 logger = logging.getLogger("MQTT_SENSOR_PUB")

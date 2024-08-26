@@ -11,14 +11,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-WS_URL = os.environ.get("WS_URL")
+
 # LOG_DIR = os.environ.get("LOG_DIR")
 TOPIC = "sensors/magnet"
 MQTT_PORT = os.environ.get("MQTT_PORT")
 HOST = os.environ.get("HOST")
 MQTT_USER = os.environ.get("MQTT_USER")
 MQTT_PASSWORD = os.environ.get("MQTT_PASSWORD")
-
+WS_URL = f"ws://{os.environ.get('HOST')}:{os.environ.get('WS_PORT')}"
 
 logger = logging.getLogger("MQTT_SENSOR_PUB")
 logging.basicConfig(filename="logs.log", encoding='utf-8', level=logging.DEBUG)
@@ -58,7 +58,7 @@ async def main():
             username=MQTT_USER,
             password=MQTT_PASSWORD,
     ) as mqtt_client:
-        await handle_ws_messages(mqtt_client, f"ws://{WS_URL}")
+        await handle_ws_messages(mqtt_client, f"{WS_URL}")
 
 if __name__ == "__main__":
     asyncio.run(main())
