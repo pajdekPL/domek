@@ -18,10 +18,10 @@ MQTT_PORT = os.environ.get("MQTT_PORT")
 HOST = os.environ.get("HOST")
 MQTT_USER = os.environ.get("MQTT_USER")
 MQTT_PASSWORD = os.environ.get("MQTT_PASSWORD")
-WS_URL = f"ws://{os.environ.get('HOST')}:{os.environ.get('WS_PORT')}"
+WS_URL = f"ws://{os.environ.get('HOST_DECONZ')}:{os.environ.get('WS_PORT')}"
 
 logger = logging.getLogger("MQTT_SENSOR_PUB")
-logging.basicConfig(filename="logs.log", encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename="log", encoding='utf-8', level=logging.DEBUG)
 
 
 async def publish_magnetic_sensor_event_to_mqtt(mqtt_client, data: MagenticSensorData):

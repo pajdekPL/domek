@@ -1,3 +1,4 @@
+import json
 import os
 import asyncio
 from aiomqtt import Client
@@ -13,15 +14,16 @@ load_dotenv()
 # LOG_DIR = os.environ.get("LOG_DIR")
 MQTT_PORT = os.environ.get("MQTT_PORT")
 HOST = os.environ.get("HOST")
+HOST_DECONZ = os.environ.get("HOST_DECONZ")
 DECONZ_API_PORT = os.environ.get("DECONZ_API_PORT")
 DECONZ_API_KEY = os.environ.get("DECONZ_API_KEY")
 MQTT_USER = os.environ.get("MQTT_USER")
 MQTT_PASSWORD = os.environ.get("MQTT_PASSWORD")
-BASE_DECONZ_API_URL = f"http://{HOST}:{DECONZ_API_PORT}/api/{DECONZ_API_KEY}/"
+BASE_DECONZ_API_URL = f"http://{HOST_DECONZ}:{DECONZ_API_PORT}/api/{DECONZ_API_KEY}/"
 TOPIC = "sensors/magnet"
 
 logger = logging.getLogger("MQTT_SENSOR_PUB")
-logging.basicConfig(filename="logs.log", encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename="log", encoding='utf-8', level=logging.DEBUG)
 
 
 def send_put_state_req_to_light(light_uuid, data):
@@ -64,7 +66,8 @@ async def main():
     ) as client:
         await client.subscribe(TOPIC)
         async for message in client.messages:
-            handle_magnetic_sensor(message)
+            data = json.loads(message.payload)
+            handle_magnetic_sensor(data)
 
 if __name__ == "__main__":
     asyncio.run(main())

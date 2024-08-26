@@ -27,15 +27,13 @@ services:
   sensor-publisher:
     image: sensor-publisher
     container_name: sensor-publisher
-    volumes:
-      - ./mosquitto/log:/mosquitto/log:rw
     restart: always
     env_file:
       - path: .env
         required: true
     depends_on:
       mqtt5:
-        condition: service_healthy
+        condition: service_started
         restart: true
       deconz:
         condition: service_healthy
@@ -44,15 +42,13 @@ services:
   sensor-subscriber:
     image: sensor-subscriber
     container_name: sensor-subscriber
-    volumes:
-      - ./mosquitto/log:/mosquitto/log:rw
     restart: always
     env_file:
       - path: .env
         required: true
     depends_on:
       mqtt5:
-        condition: service_healthy
+        condition: service_started
         restart: true
       deconz:
         condition: service_healthy
