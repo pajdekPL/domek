@@ -1,0 +1,53 @@
+services:
+  mqtt5:
+    image: eclipse-mosquitto
+    container_name: mqtt5
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto/config:/mosquitto/config:rw
+      - ./mosquitto/data:/mosquitto/data:rw
+      - ./mosquitto/log:/mosquitto/log:rw
+    restart: unless-stopped
+  deconz:
+    image: deconzcommunity/deconz
+    container_name: deconz
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /opt/deconz:/opt/deCONZ
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    devices:
+      - /dev/ttyACM0 #Conbee2 default device mapping
+
+  sensor-publisher:
+    image: sensor-publisher
+    container_name: sensor-publisher
+    volumes:
+      - ./mosquitto/log:/mosquitto/log:rw
+    restart: always
+    env_file:
+      - path: .env
+        required: true
+
+  sensor-subscriber:
+    image: sensor-subscriber
+    container_name: sensor-subscriber
+    volumes:
+      - ./mosquitto/log:/mosquitto/log:rw
+    restart: always
+    env_file:
+      - path: .env
+        required: true
+
+volumes:
+  config:
+  data:
+  log:
+
+networks:
+  default:
+    name: mqtt5-network

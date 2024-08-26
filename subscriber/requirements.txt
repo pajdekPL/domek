@@ -1,0 +1,6 @@
+aiomqtt==2.3.0
+paho-mqtt==2.1.0
+python-dotenv==1.0.1
+requests==2.32.3
+typing_extensions==4.12.2
+websockets==13.0
