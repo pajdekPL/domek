@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 WS_URL = os.environ.get("WS_URL")
-LOG_DIR = os.environ.get("LOG_DIR")
+# LOG_DIR = os.environ.get("LOG_DIR")
 TOPIC = "sensors/magnet"
 MQTT_PORT = os.environ.get("MQTT_PORT")
 HOST = os.environ.get("HOST")
@@ -21,7 +21,7 @@ MQTT_PASSWORD = os.environ.get("MQTT_PASSWORD")
 
 
 logger = logging.getLogger("MQTT_SENSOR_PUB")
-logging.basicConfig(filename=LOG_DIR, encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename="logs.log", encoding='utf-8', level=logging.DEBUG)
 
 
 async def publish_magnetic_sensor_event_to_mqtt(mqtt_client, data: MagenticSensorData):

@@ -10,13 +10,16 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-LOG_DIR = os.environ.get("LOG_DIR")
+# LOG_DIR = os.environ.get("LOG_DIR")
 MQTT_PORT = os.environ.get("MQTT_PORT")
 HOST = os.environ.get("HOST")
 MQTT_USER = os.environ.get("MQTT_USER")
 MQTT_PASSWORD = os.environ.get("MQTT_PASSWORD")
 BASE_DECONZ_API_URL = os.environ.get("BASE_DECONZ_API_URL")
 TOPIC = "sensors/magnet"
+
+logger = logging.getLogger("MQTT_SENSOR_PUB")
+logging.basicConfig(filename="logs.log", encoding='utf-8', level=logging.DEBUG)
 
 
 def send_put_state_req_to_light(light_uuid, data):
