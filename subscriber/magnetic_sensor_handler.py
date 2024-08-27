@@ -13,7 +13,7 @@ load_dotenv()
 
 # LOG_DIR = os.environ.get("LOG_DIR")
 MQTT_PORT = os.environ.get("MQTT_PORT")
-HOST = os.environ.get("HOST")
+HOST_MQTT = os.environ.get("HOST_MQTT")
 HOST_DECONZ = os.environ.get("HOST_DECONZ")
 DECONZ_API_PORT = os.environ.get("DECONZ_API_PORT")
 DECONZ_API_KEY = os.environ.get("DECONZ_API_KEY")
@@ -59,7 +59,7 @@ def handle_magnetic_sensor(data):
 
 async def main():
     async with Client(
-            hostname=HOST,
+            hostname=HOST_MQTT,
             port=int(MQTT_PORT),
             username=MQTT_USER,
             password=MQTT_PASSWORD,

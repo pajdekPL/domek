@@ -15,7 +15,7 @@ load_dotenv()
 # LOG_DIR = os.environ.get("LOG_DIR")
 TOPIC = "sensors/magnet"
 MQTT_PORT = os.environ.get("MQTT_PORT")
-HOST = os.environ.get("HOST")
+HOST_MQTT = os.environ.get("HOST_MQTT")
 MQTT_USER = os.environ.get("MQTT_USER")
 MQTT_PASSWORD = os.environ.get("MQTT_PASSWORD")
 WS_URL = f"ws://{os.environ.get('HOST_DECONZ')}:{os.environ.get('WS_PORT')}"
@@ -53,7 +53,7 @@ async def handle_ws_messages(mqtt_client, uri):
 
 async def main():
     async with Client(
-            hostname=HOST,  # The only non-optional parameter
+            hostname=HOST_MQTT,  # The only non-optional parameter
             port=int(MQTT_PORT),
             username=MQTT_USER,
             password=MQTT_PASSWORD,

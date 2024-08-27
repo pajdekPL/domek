@@ -1,0 +1,9 @@
+HOST_MQTT=mqtt5
+HOST_DECONZ=deconz
+WS_PORT=443
+DECONZ_API_PORT=80
+MQTT_USER=mqtt_user
+MQTT_PASSWORD=mqtt_paswword
+MQTT_PORT=1883
+LOG_DIR=sensors.log
+DECONZ_API_KEY=deconz_user_api_key
